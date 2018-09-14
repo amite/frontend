@@ -7,3 +7,16 @@ before_install:
 
 script:
   - docker run amite/frontend npm run test -- --coverage
+
+deploy:
+  - provider: elasticbeanstalk
+    region: "ap-south-1"
+    app: "frontend"
+    env: "Frontend-env"
+    bucket_name: "elasticbeanstalk-ap-south-1-608848031026"
+    bucket_path: "frontend"
+    on:
+      branch: master
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key:
+      secure: $AWS_SECRET_KEY
